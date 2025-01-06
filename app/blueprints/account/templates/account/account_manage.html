@@ -1,0 +1,37 @@
+<!-- kosar/app/blueprints/account/templates/account/account_manage.html -->
+{% extends 'account/base.html' %}
+{% block title %}Manage Account{% endblock %}
+
+{% block content %}
+<h2>Manage Account</h2>
+<form method="POST" class="account-form">
+  <div class="form-group">
+    <label>Account Number</label>
+    <input type="text" name="account_number"
+           value="{{ account_doc.account_number if account_doc else '' }}">
+  </div>
+
+  <div class="form-group">
+    <label>Subscription Level</label>
+    {% set current_level = account_doc.subscription_level if account_doc else '' %}
+    <select name="subscription_level">
+      <option value="Basic" {% if current_level == "Basic" %}selected{% endif %}>Basic</option>
+      <option value="Premium" {% if current_level == "Premium" %}selected{% endif %}>Premium</option>
+      <option value="Enterprise" {% if current_level == "Enterprise" %}selected{% endif %}>Enterprise</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Renewal Frequency</label>
+    {% set current_freq = account_doc.renewal_frequency if account_doc else '' %}
+    <select name="renewal_frequency">
+      <option value="Monthly" {% if current_freq == "Monthly" %}selected{% endif %}>Monthly</option>
+      <option value="Annual" {% if current_freq == "Annual" %}selected{% endif %}>Annual</option>
+    </select>
+  </div>
+
+  <div class="form-actions">
+    <button type="submit">Save</button>
+  </div>
+</form>
+{% endblock %}

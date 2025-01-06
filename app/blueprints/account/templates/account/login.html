@@ -1,0 +1,20 @@
+<!-- kosar/app/blueprints/account/templates/account/login.html -->
+{% extends '/account/base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h2>Login</h2>
+<form method="POST" action="{{ url_for('account.login') }}">
+  <div>
+    <label>Username</label>
+    <input type="text" name="username">
+  </div>
+  <div>
+    <label>Password</label>
+    <input type="password" name="password">
+  </div>
+  <div style="margin-top:0.5rem;">
+    <button type="submit">Login</button>
+  </div>
+</form>
+{% endblock %}
