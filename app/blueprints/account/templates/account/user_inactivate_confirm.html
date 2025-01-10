@@ -1,0 +1,25 @@
+{% extends "account/base.html" %}
+{% block content %}
+<h1>Inactivate User</h1>
+<p>Are you sure you want to inactivate the user <strong>{{ user.username }}</strong>?</p>
+<p>Please provide a reason for this action (optional but recommended):</p>
+
+<form method="POST">
+  <!-- Reason for inactivation -->
+  <div class="mb-3">
+    <label for="inactivate_reason" class="form-label">Reason for Inactivation</label>
+    <input type="text" class="form-control" id="inactivate_reason" name="inactivate_reason"
+           placeholder="e.g., user requested closure, inactive user, etc.">
+  </div>
+
+  <!-- Submit Button -->
+  <button type="submit" class="btn btn-danger">
+    Confirm Inactivation
+  </button>
+
+  <!-- Cancel / Go Back -->
+  <a href="{{ url_for('account.user_list') }}" class="btn btn-secondary ms-2">
+    Cancel
+  </a>
+</form>
+{% endblock %}

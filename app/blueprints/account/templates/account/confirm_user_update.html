@@ -1,0 +1,42 @@
+{% extends "account/base.html" %}
+{% block content %}
+<h2>Confirm User {{ mode|title }} Details</h2>
+
+<p>Please review the details before finalizing.</p>
+
+<!-- We’re using hidden fields to carry the data forward in the final POST. -->
+<form method="POST" action="{{ url_for('account.user_confirm') }}">
+  <ul>
+    <li><strong>First Name:</strong> {{ first_name }}</li>
+    <li><strong>Last Name:</strong> {{ last_name }}</li>
+    <li><strong>Email:</strong> {{ email }}</li>
+    <li><strong>Username:</strong> {{ username }}</li>
+    <li><strong>Password:</strong>
+      {% if password %}
+        (Will be updated)
+      {% else %}
+        (Unchanged / Not Set)
+      {% endif %}
+    </li>
+  </ul>
+
+  <!-- Hidden Inputs to pass data into final POST -->
+  <input type="hidden" name="first_name" value="{{ first_name }}">
+  <input type="hidden" name="last_name" value="{{ last_name }}">
+  <input type="hidden" name="email" value="{{ email }}">
+  <input type="hidden" name="username" value="{{ username }}">
+  <input type="hidden" name="password" value="{{ password }}">
+  <input type="hidden" name="mode" value="{{ mode }}">
+  <!-- If it’s an edit, pass user_id -->
+  {% if user_id %}
+    <input type="hidden" name="user_id" value="{{ user_id }}">
+  {% endif %}
+
+  <button type="submit" class="btn btn-primary">
+    Confirm &amp; Save
+  </button>
+  <a href="{{ url_for('account.user_list') }}" class="btn btn-secondary">
+    Cancel
+  </a>
+</form>
+{% endblock %}

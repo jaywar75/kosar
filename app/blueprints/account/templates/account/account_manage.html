@@ -1,37 +1,81 @@
 <!-- kosar/app/blueprints/account/templates/account/account_manage.html -->
-{% extends 'account/base.html' %}
+{% extends "account/base.html" %}
 {% block title %}Manage Account{% endblock %}
 
 {% block content %}
 <h2>Manage Account</h2>
-<form method="POST" class="account-form">
-  <div class="form-group">
-    <label>Account Number</label>
-    <input type="text" name="account_number"
-           value="{{ account_doc.account_number if account_doc else '' }}">
+
+<form method="POST" class="row g-3 account-form">
+  <!-- Account Number -->
+  <div class="col-md-6">
+    <label for="account_number" class="form-label">Account Number</label>
+    <input
+      type="text"
+      class="form-control"
+      id="account_number"
+      name="account_number"
+      value="{{ account_doc.account_number if account_doc else '' }}"
+      placeholder="Auto-generated if left blank"
+    >
   </div>
 
-  <div class="form-group">
-    <label>Subscription Level</label>
+  <!-- Subscription Level -->
+  <div class="col-md-6">
+    <label for="subscription_level" class="form-label">Subscription Level</label>
     {% set current_level = account_doc.subscription_level if account_doc else '' %}
-    <select name="subscription_level">
+    <select
+      class="form-select"
+      name="subscription_level"
+      id="subscription_level"
+    >
       <option value="Basic" {% if current_level == "Basic" %}selected{% endif %}>Basic</option>
       <option value="Premium" {% if current_level == "Premium" %}selected{% endif %}>Premium</option>
       <option value="Enterprise" {% if current_level == "Enterprise" %}selected{% endif %}>Enterprise</option>
     </select>
   </div>
 
-  <div class="form-group">
-    <label>Renewal Frequency</label>
+  <!-- Renewal Frequency -->
+  <div class="col-md-6">
+    <label for="renewal_frequency" class="form-label">Renewal Frequency</label>
     {% set current_freq = account_doc.renewal_frequency if account_doc else '' %}
-    <select name="renewal_frequency">
+    <select
+      class="form-select"
+      name="renewal_frequency"
+      id="renewal_frequency"
+    >
       <option value="Monthly" {% if current_freq == "Monthly" %}selected{% endif %}>Monthly</option>
       <option value="Annual" {% if current_freq == "Annual" %}selected{% endif %}>Annual</option>
     </select>
   </div>
 
-  <div class="form-actions">
-    <button type="submit">Save</button>
+  <!-- Company Name (new, optional) -->
+  <div class="col-md-6">
+    <label for="company_name" class="form-label">Company Name (optional)</label>
+    <input
+      type="text"
+      class="form-control"
+      id="company_name"
+      name="company_name"
+      value="{{ account_doc.company_name if account_doc.company_name else '' }}"
+      placeholder="Enter Company Name (optional)"
+    >
+  </div>
+
+  <!-- Billing Address (new, optional) -->
+  <div class="col-12">
+    <label for="billing_address" class="form-label">Billing Address (optional)</label>
+    <textarea
+      class="form-control"
+      id="billing_address"
+      name="billing_address"
+      rows="3"
+      placeholder="Enter billing address (optional)"
+    >{{ account_doc.billing_address if account_doc.billing_address else '' }}</textarea>
+  </div>
+
+  <!-- Save Button -->
+  <div class="col-12 text-end">
+    <button type="submit" class="btn btn-primary">Save</button>
   </div>
 </form>
 {% endblock %}

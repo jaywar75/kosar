@@ -1,146 +1,253 @@
-/*----------------------------------------------------------------------
- STYLED NAV BAR
-----------------------------------------------------------------------*/
-
-/* A lightweight, horizontal nav bar with a subtle background */
-.navbar {
-  background-color: #f8f8f8;  /* navbar background */
-  margin-bottom: 1rem;        /* space below the nav bar */
-  padding: 0.5rem;            /* some vertical padding */
-  border-radius: 1px;         /* optional: slight corners */
-}
-
-.navbar ul {
-  margin: 0;
-  padding: 1.5px;
-  list-style: none;
-  display: flex;              /* horizontal layout of li elements */
-}
-
-.navbar ul li {
-  margin-right: 1rem;         /* spacing between each nav item */
-}
-
-.navbar ul li a {
-  display: inline-block;
-  color: #333;                /* navbar text */
-  text-decoration: none;
-  padding: 0.5rem 1rem;       /* internal spacing for each link */
-  transition: background 0.3s;/* smoother hover effect */
-}
-
-.navbar ul li a:hover {
-  background-color: #444;     /* slightly darker on hover */
-  color: #fff;                /* invert text color */
-  border-radius: 4px;
-}
-
-/*----------------------------------------------------------------------
+/****************************************************************************
  BASIC GLOBAL STYLES
-----------------------------------------------------------------------*/
+****************************************************************************/
 
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Roboto", Arial, sans-serif; /* More modern font than default Arial */
   margin: 0;
   padding: 0;
-  background: #f2f2f2;        /* light gray page background */
+  background: #f2f2f2; /* light gray page background */
+  color: #333;
 }
 
-.container {
+/*
+  Renamed .container to .main-container to avoid conflict
+  with .container from Bootstrap
+*/
+.main-container {
   width: 100%;
-  max-width: 480px;           /* narrower container for readability */
-  margin: 0 auto;
-  margin-top: 50px;
+  max-width: 480px; /* narrower container for readability */
+  margin: 50px auto 0 auto;
   background: #fff;
-  padding: 1rem;
-  border-radius: 5px;
+  padding: 1.5rem; /* increased padding for breathing room */
+  border-radius: 8px; /* softer corners */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* subtle card-like shadow */
 }
 
 h2 {
   margin-top: 0;
   margin-bottom: 1rem;
+  font-weight: 600; /* slightly bolder */
 }
 
-/*----------------------------------------------------------------------
+/****************************************************************************
  FORMS AND INPUTS
-----------------------------------------------------------------------*/
+****************************************************************************/
 
 /* Generic label styling */
 label {
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  color: #555; /* slightly muted */
+  letter-spacing: 0.5px; /* small spacing for a modern feel */
 }
 
-/* Basic text/password inputs */
+/* Basic text/password/email inputs */
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="email"] {
   width: 100%;
-  padding: 0.4rem;
-  margin-bottom: 1rem;
+  padding: 0.5rem 0.75rem;
+  margin-bottom: 1.2rem;
   box-sizing: border-box;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Provide better focus styling */
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus {
+  outline: none;
+  border-color: #007BFF;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.2);
 }
 
 /* Button styling for forms or otherwise */
 button {
   background: #007BFF;
   color: #fff;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1.2rem;
   border: none;
   cursor: pointer;
-  border-radius: 3px;
-  transition: background 0.2s;
+  border-radius: 4px;
+  transition: background 0.2s, opacity 0.2s;
+  font-size: 0.95rem;
 }
 
 button:hover {
   background: #0056b3;
 }
 
-/*----------------------------------------------------------------------
- ENHANCED FORM LAYOUT FOR ACCOUNT MANAGEMENT
-----------------------------------------------------------------------*/
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
 
-/* A parent container for forms like account_manage */
+/****************************************************************************
+ ACCOUNT MANAGEMENT FORMS
+****************************************************************************/
+
 .account-form {
-  max-width: 400px;          /* narrower form layout */
-  margin: 2rem auto;         /* center the form, add vertical spacing */
-  padding: 1rem;
-  background-color: #fff;    /* keep white if the container or page is different */
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem 1.25rem;
+  background-color: #fff;
   border: 1px solid #ddd;
-  border-radius: 5px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.03);
 }
 
-/* Spacing for each label+input pair */
 .form-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
 
-/* On focus, highlight inputs lightly */
+/* On focus, highlight inputs lightly - integrated with the general focus above */
 .account-form input[type="text"]:focus,
 .account-form input[type="password"]:focus,
+.account-form input[type="email"]:focus,
 .account-form select:focus {
-  outline: none;
-  border-color: #888;
+  border-color: #007BFF;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
 }
 
 /* Styling a <select> if you have subscription/renewal dropdowns */
 .account-form select {
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.5rem 0.75rem;
   box-sizing: border-box;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-size: 0.95rem;
+}
+
+/* Basic focus styling for select */
+.account-form select:focus {
+  border-color: #007BFF;
+  box-shadow: 0 0 0 2px rgba(0,123,255,0.15);
 }
 
 /* The container for form actions/buttons */
 .form-actions {
-  text-align: right;  /* push the Save button to the right */
-  margin-top: 1rem;
+  text-align: right;
+  margin-top: 1.5rem;
 }
 
 .form-actions button {
-  margin-left: 0.5rem; /* if you want spacing between multiple buttons */
+  margin-left: 0.5rem;
+}
+
+/****************************************************************************
+ TABLES
+****************************************************************************/
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+table thead tr {
+  background-color: #f8f8f8;
+}
+
+table th,
+table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #ebebeb;
+}
+
+/* Hover effect on table rows */
+table tbody tr:hover {
+  background-color: #fafafa;
+  transition: background 0.2s;
+}
+
+table .actions a {
+  margin-right: 0.5rem;
+  text-decoration: none;
+  color: #007BFF;
+  font-weight: 500;
+}
+
+table .actions a:hover {
+  color: #0056b3;
+}
+
+/****************************************************************************
+ OPTIONAL CUSTOM NAVBAR
+****************************************************************************/
+/*
+  Renamed from `.navbar` to `.my-navbar` to avoid clashing with
+  Bootstrap 5’s .navbar class. Use this only if you prefer
+  a custom nav style separate from Bootstrap’s classes.
+*/
+
+/* Example custom navbar class:
+.my-navbar {
+  background-color: #f8f8f8;
+  margin-bottom: 1rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+}
+
+.my-navbar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.my-navbar li {
+  margin-right: 1rem;
+}
+
+.my-navbar li a {
+  display: inline-block;
+  color: #333;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: background 0.3s;
+}
+
+.my-navbar li a:hover {
+  background-color: #444;
+  color: #fff;
+  border-radius: 4px;
+}
+*/
+
+/****************************************************************************
+ UTILITY / MISC
+****************************************************************************/
+/* Utility class for spacing or alignment adjustments */
+.mt-2 { margin-top: 0.5rem; }
+.mt-3 { margin-top: 1rem; }
+.mt-4 { margin-top: 1.5rem; }
+
+/* Button variants */
+.btn-secondary {
+  background: #6c757d;
+}
+.btn-secondary:hover {
+  background: #5a6268;
+}
+
+.btn-danger {
+  background: #dc3545;
+}
+.btn-danger:hover {
+  background: #bd2130;
+}
+
+/* Subtle text styling for disclaimers, etc. */
+.text-muted {
+  color: #6c757d;
+  font-size: 0.9rem;
 }

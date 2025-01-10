@@ -1,0 +1,53 @@
+{# kosar/app/blueprints/account/templates/account/account_list.html #}
+{% extends "account/base.html" %}
+
+{% block title %}
+  All Accounts
+{% endblock %}
+
+{% block content %}
+<h2>All Accounts</h2>
+<hr class="mb-4">
+
+{% if all_accounts %}
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Account Number</th>
+        <th>Subscription Level</th>
+        <th>Renewal Frequency</th>
+        <th>Company Name</th>
+        <th>Billing Address</th>
+        <th>Actions</th>  {# New column for the Edit button #}
+      </tr>
+    </thead>
+    <tbody>
+      {% for acc in all_accounts %}
+      <tr>
+        <td>{{ acc.username }}</td>
+        <td>{{ acc.account_number }}</td>
+        <td>{{ acc.subscription_level }}</td>
+        <td>{{ acc.renewal_frequency }}</td>
+        <td>{{ acc.company_name }}</td>
+        <td>{{ acc.billing_address }}</td>
+        <td>
+          <!-- Link to the manage/edit page -->
+          <a class="btn btn-sm btn-warning"
+             href="{{ url_for('account.manage_account', account_number=acc.account_number) }}">
+            Edit
+          </a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>No accounts found.</p>
+{% endif %}
+
+<!-- Optionally add a link or button to go back to dashboard, manage page, etc. -->
+<p>
+  <a class="btn btn-secondary" href="{{ url_for('account.dashboard') }}">Back to Dashboard</a>
+</p>
+{% endblock %}

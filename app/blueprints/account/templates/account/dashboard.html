@@ -1,11 +1,19 @@
-<!-- kosar/app/blueprints/account/templates/account/dashboard.html -->
-{% extends '/account/base.html' %}
-{% block title %}Dashboard{% endblock %}
-
+{% extends "account/base.html" %}
 {% block content %}
-<h2>Dashboard</h2>
 
-<p>
-    Hello, {{ username }}! You are logged in to the world's most-retarded app!!!!
-</p>
+<div class="row my-4">
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h3>Total Accounts</h3>
+            <p class="fs-4">{{ total_accounts }}</p>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card p-3">
+            <h3>Total Users</h3>
+            <p class="fs-4">{{ total_users }}</p>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

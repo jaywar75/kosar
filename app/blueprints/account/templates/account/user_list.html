@@ -1,0 +1,39 @@
+{% extends "account/base.html" %}
+{% block content %}
+<h2>User Management</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.first_name or 'N/A' }}</td>
+            <td>{{ user.last_name or 'N/A' }}</td>
+            <td>{{ user.email or 'N/A' }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.status or 'Active' }}</td>
+            <td>
+                <a href="{{ url_for('account.user_edit', user_id=user._id) }}">Edit</a>
+                <a href="{{ url_for('account.user_inactivate', user_id=user._id) }}"
+                   onclick="return confirm('Inactivate this user?');">
+                    Inactivate
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<!-- Link to create a new user record -->
+<a class="btn btn-primary" href="{{ url_for('account.user_create') }}">Add New User</a>
+
+{% endblock %}
