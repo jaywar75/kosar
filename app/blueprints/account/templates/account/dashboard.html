@@ -1,17 +1,51 @@
 {% extends "account/base.html" %}
 {% block content %}
 
-<div class="row my-4">
-    <div class="col-md-6">
-        <div class="card p-3">
-            <h3>Total Accounts</h3>
-            <p class="fs-4">{{ total_accounts }}</p>
+<div class="container my-4">
+    <h1 class="mb-4">Welcome, {{ username }}!</h1>
+
+    <!-- Row holding the three stats cards -->
+    <div class="row g-4">
+        <!-- Card #1: Total Accounts -->
+        <div class="col-md-4">
+            <div class="card border-primary shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Total Accounts</h5>
+                    <hr>
+                    <p class="display-5">{{ total_accounts }}</p>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <div class="card p-3">
-            <h3>Total Users</h3>
-            <p class="fs-4">{{ total_users }}</p>
+
+        <!-- Card #2: Total Users -->
+        <div class="col-md-4">
+            <div class="card border-success shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-success">Total Users</h5>
+                    <hr>
+                    <p class="display-5">{{ total_users }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card #3: Users per Account -->
+        <div class="col-md-4">
+            <div class="card border-info shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title text-info">Users per Account</h5>
+                    <hr>
+                    <ul class="list-group list-group-flush">
+                      {% for item in account_user_counts %}
+                      <li class="list-group-item d-flex justify-content-between">
+                        <span>{{ item.company_name or 'N/A' }}</span>
+                        <span class="badge bg-info text-dark">
+                          {{ item.user_count }} user(s)
+                        </span>
+                      </li>
+                      {% endfor %}
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

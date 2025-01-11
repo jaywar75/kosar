@@ -1,0 +1,26 @@
+services:
+  web:
+    build: .
+    container_name: kosar_app
+    ports:
+      - "7778:7778"
+    depends_on:
+      - mongo
+    environment:
+      - FLASK_ENV=development
+      - MONGO_URI=mongodb://mongo:27017/kosar_db
+      # Add more env vars if needed
+    volumes:
+      - .:/app
+    command: ["python", "run.py"]
+
+  mongo:
+    image: mongo:6.0
+    container_name: kosar_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

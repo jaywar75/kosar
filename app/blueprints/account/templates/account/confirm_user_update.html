@@ -11,24 +11,30 @@
     <li><strong>Last Name:</strong> {{ last_name }}</li>
     <li><strong>Email:</strong> {{ email }}</li>
     <li><strong>Username:</strong> {{ username }}</li>
-    <li><strong>Password:</strong>
-      {% if password %}
-        (Will be updated)
-      {% else %}
-        (Unchanged / Not Set)
-      {% endif %}
-    </li>
-  </ul>
+   <li>Password:
+    {% if password %} (Will be updated) {% else %} (Unchanged) {% endif %}
+  </li>
+  <li>Associated Account:
+    {% if selected_company_name %}
+      {{ selected_company_name }}
+    {% else %}
+      (None Selected)
+    {% endif %}
+  </li>
+</ul>
 
   <!-- Hidden Inputs to pass data into final POST -->
-  <input type="hidden" name="first_name" value="{{ first_name }}">
-  <input type="hidden" name="last_name" value="{{ last_name }}">
-  <input type="hidden" name="email" value="{{ email }}">
-  <input type="hidden" name="username" value="{{ username }}">
-  <input type="hidden" name="password" value="{{ password }}">
-  <input type="hidden" name="mode" value="{{ mode }}">
+      <input type="hidden" name="first_name" value="{{ first_name }}">
+      <input type="hidden" name="last_name" value="{{ last_name }}">
+      <input type="hidden" name="email" value="{{ email }}">
+      <input type="hidden" name="username" value="{{ username }}">
+      <input type="hidden" name="password" value="{{ password }}">
+      <input type="hidden" name="mode" value="{{ mode }}">
+      <input type="hidden" name="selected_account_id" value="{{ selected_account_id }}">
   <!-- If it’s an edit, pass user_id -->
   {% if user_id %}
+    <!-- The rest of your hidden fields: mode, user_id, etc. -->
+    <input type="hidden" name="mode" value="{{ mode }}">
     <input type="hidden" name="user_id" value="{{ user_id }}">
   {% endif %}
 

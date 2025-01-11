@@ -55,6 +55,23 @@
         placeholder="Leave blank if not changing password"
     >
 
+    <!-- Account Dropdown -->
+    <label for="account_id">Associated Account:</label>
+    <select id="account_id" name="account_id">
+        <option value="">(No associated account)</option>
+        {% for acct in accounts %}
+            {% set acct_id_str = acct._id|string %}
+            <option
+                value="{{ acct_id_str }}"
+                {% if user and user.account_id and acct_id_str == (user.account_id|string) %}
+                    selected
+                {% endif %}
+            >
+                {{ acct.company_name }}
+            </option>
+        {% endfor %}
+    </select>
+
     <!-- Submit Button -->
     <button type="submit">
         {% if action == 'create' %}Next (Review){% else %}Next (Review){% endif %}
